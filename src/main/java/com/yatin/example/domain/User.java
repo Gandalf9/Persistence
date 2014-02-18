@@ -29,6 +29,9 @@ public class User {
 	})
 	private HomeAddress billingAddress;
 	
+	public User() {
+	}
+	
 	public User(int id, String userName) {
 		this.id = id;
 		this.userName = userName;
