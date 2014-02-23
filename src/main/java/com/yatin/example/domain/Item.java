@@ -25,7 +25,7 @@ public class Item {
 	@ElementCollection
 	private Map<String, Image> images = new HashMap<String, Image>();
 	
-	@OneToMany(mappedBy="item", cascade= {CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToMany(mappedBy="item", orphanRemoval=true, cascade= {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<Bid> bids = new HashSet<Bid>();
 	
 	public Item() {
