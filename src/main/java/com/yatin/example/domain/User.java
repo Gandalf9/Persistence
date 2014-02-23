@@ -1,9 +1,5 @@
 package com.yatin.example.domain;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -18,16 +14,6 @@ public class User {
 	private String firstName;
 	
 	private String surname;
-	
-	@Embedded
-	private HomeAddress homeAddress;
-	
-	@Embedded
-	@AttributeOverrides({
-		@AttributeOverride(name="street", column=@Column(name="Billing_street")),
-		@AttributeOverride(name="postCode", column=@Column(name="Billing_postcode"))
-	})
-	private HomeAddress billingAddress;
 	
 	public User() {
 	}
@@ -65,19 +51,4 @@ public class User {
 		this.surname = surname;
 	}
 
-	public HomeAddress getHomeAddress() {
-		return homeAddress;
-	}
-
-	public void setHomeAddress(HomeAddress homeAddress) {
-		this.homeAddress = homeAddress;
-	}
-
-	public HomeAddress getBillingAddress() {
-		return billingAddress;
-	}
-
-	public void setBillingAddress(HomeAddress billingAddress) {
-		this.billingAddress = billingAddress;
-	}
 }

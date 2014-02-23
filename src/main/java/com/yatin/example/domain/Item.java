@@ -1,13 +1,17 @@
 package com.yatin.example.domain;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Item {
@@ -18,8 +22,11 @@ public class Item {
 	
 	private String name;
 	
-	@Transient
-	private Set<String> images = new HashSet<String>();
+	@ElementCollection
+	private Map<String, Image> images = new HashMap<String, Image>();
+	
+	@OneToMany(mappedBy="item", cascade= {CascadeType.PERSIST, CascadeType.MERGE})
+	private Set<Bid> bids = new HashSet<Bid>();
 	
 	public Item() {
 	}
@@ -40,11 +47,24 @@ public class Item {
 		this.name = name;
 	}
 
-	public Set<String> getImages() {
+	public Map<String, Image> getImages() {
 		return images;
 	}
 
-	public void setImages(Set<String> images) {
+	public void setImages(Map<String, Image> images) {
 		this.images = images;
+	}
+
+	public Set<Bid> getBids() {
+		return bids;
+	}
+
+	public void setBids(Set<Bid> bids) {
+		this.bids = bids;
+	}
+	
+	public void addBid(Bid bid) {
+		bid.setItem(this);
+		bids.add(bid);
 	}
 }
